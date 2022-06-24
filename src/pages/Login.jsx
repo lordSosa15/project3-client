@@ -46,7 +46,7 @@ const Login = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     submitFormData();
-    navigateTo("/products");
+    navigateTo("/");
   };
 
   const logoutHandler = (e) => {
