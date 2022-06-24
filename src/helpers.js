@@ -1,5 +1,5 @@
 
-const API = process.env.ORIGIN || 'http://localhost:8080';
+const API = process.env.ORIGIN || 'https://magenta-cendol-be6ad4.netlify.app';
 
 export async function fetchFromAPI(endpoint, opts) {
     const { method, body} = {method: 'POST', body: null, ...opts};
