@@ -1,11 +1,9 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form } from "../components";
 import { authAxios } from "../customAxios/authAxios";
 
 const AddProduct = () => {
-  
   const defaultFormData = {
     image: "",
     name: "",
@@ -14,17 +12,16 @@ const AddProduct = () => {
   };
   const [formData, setFormData] = useState(defaultFormData);
 
-  const navigateTo = useNavigate()
+  const navigateTo = useNavigate();
 
   const addNewProduct = async () => {
     // eslint-disable-next-line
     const { data } = await authAxios.post(
-      `http://localhost:5005/products/newproduct`,
+      `https://ecommerce-project3.herokuapp.com/products/newproduct`,
       formData
     );
-        navigateTo('/products')
-
-    }
+    navigateTo("/products");
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -39,7 +36,7 @@ const AddProduct = () => {
   const changeHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  
+
   return (
     <div className="products-heading">
       <h1>Add a new product</h1>

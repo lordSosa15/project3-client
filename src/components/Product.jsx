@@ -6,7 +6,9 @@ const Product = () => {
   const [products, setProducts] = useState([]);
 
   const getProducts = async () => {
-    const { data } = await authAxios.get(`http://localhost:5005/products`);
+    const { data } = await authAxios.get(
+      `https://ecommerce-project3.herokuapp.com/products`
+    );
     setProducts(() => data);
   };
 
@@ -20,7 +22,6 @@ const Product = () => {
   return (
     <div className="maylike-products-container">
       {products.map((product) => {
-
         return (
           <div className="product-card" key={product.image[0]}>
             <Link to={`/products/${product._id}`}>

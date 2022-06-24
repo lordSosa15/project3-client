@@ -34,7 +34,7 @@ const Login = () => {
   const submitFormData = async () => {
     try {
       const { data } = await authAxios.post(
-        `http://localhost:5005/${loginState}`,
+        `https://ecommerce-project3.herokuapp.com/${loginState}`,
         formData
       );
       setUser(() => data);
@@ -60,7 +60,6 @@ const Login = () => {
     event.preventDefault();
   };
 
-
   return user ? (
     <div>
       <button className="btn" onClick={logoutHandler}>
@@ -79,16 +78,14 @@ const Login = () => {
         Register
       </button>
       <form onSubmit={submitHandler} style={{ textAlign: "center" }}>
-      <InputLabel className="required">Email</InputLabel>
+        <InputLabel className="required">Email</InputLabel>
         <Input
           type={formData.showEmail ? "text" : "email"}
           name="email"
           onChange={changeHandler}
           value={formData.email}
         />
-       <InputLabel className="required" >
-          Password
-        </InputLabel>
+        <InputLabel className="required">Password</InputLabel>
         <Input
           type={formData.showPassword ? "text" : "password"}
           name="password"

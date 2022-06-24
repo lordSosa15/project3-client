@@ -12,7 +12,9 @@ const Products = () => {
   //We are using authAxios here to prevent unauthorized user to view the product list
 
   const getProducts = async () => {
-    const { data } = await authAxios.get(`http://localhost:5005/products`);
+    const { data } = await authAxios.get(
+      `https://ecommerce-project3.herokuapp.com/products`
+    );
     setProducts(() => data);
   };
 

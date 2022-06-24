@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useState } from "react";
 import {
   AiFillStar,
@@ -7,7 +6,7 @@ import {
   AiOutlineStar,
 } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router-dom";
-import UserContext from '../context/UserContext';
+import UserContext from "../context/UserContext";
 import { Form, Product } from "../components";
 import { useStateContext } from "../context/StateContext";
 import { authAxios } from "../customAxios/authAxios";
@@ -26,19 +25,21 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [editToggler, setEditToggler] = useState(false);
   const [formData, setFormData] = useState(defaultFormData);
-  
+
   const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
   const [index, setIndex] = useState(0);
   //    getting product detail from database using id
   const getProductsDetails = async () => {
-    const { data } = await  authAxios.get(`http://localhost:5005/products/${id}`);
+    const { data } = await authAxios.get(
+      `https://ecommerce-project3.herokuapp.com/products/${id}`
+    );
     setProduct(() => data);
     setFormData(() => data);
   };
 
   const updateProductDetail = async () => {
     const { data } = await authAxios.post(
-      `http://localhost:5005/products/${id}`,
+      `https://ecommerce-project3.herokuapp.com/products/${id}`,
       formData
     );
     setProduct(() => data);
@@ -47,18 +48,23 @@ const ProductDetails = () => {
 
   const deleteProduct = async () => {
     // eslint-disable-next-line
-    const { data } = await authAxios.delete(`http://localhost:5005/products/${id}`);
+    const { data } = await authAxios.delete(
+      `https://ecommerce-project3.herokuapp.com/products/${id}`
+    );
     navigateTo("/products");
   };
 
-  useEffect(() => {
-    try {
-      getProductsDetails();
-    } catch  (error) {
-      console.log(error);
-  }}, 
-  // eslint-disable-next-line
-  [id]);
+  useEffect(
+    () => {
+      try {
+        getProductsDetails();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // eslint-disable-next-line
+    [id]
+  );
 
   const changeHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -93,7 +99,7 @@ const ProductDetails = () => {
           {/* main product image */}
           <div className="image-container">
             <img
-              src={ product?.image[index]}
+              src={product?.image[index]}
               alt="product pic"
               className="product-detail-image"
             />
@@ -150,14 +156,16 @@ const ProductDetails = () => {
               <button className="buy-now" onClick={handleBuyNow}>
                 Buy Now
               </button>
-              {user.role === 'admin' && (<>
-              <button className="add-to-cart" onClick={editHandler}>
-                Edit
-              </button>
-              
-              <button className="buy-now" onClick={deleteHandler}>
-                🗑
-              </button></>
+              {user.role === "admin" && (
+                <>
+                  <button className="add-to-cart" onClick={editHandler}>
+                    Edit
+                  </button>
+
+                  <button className="buy-now" onClick={deleteHandler}>
+                    🗑
+                  </button>
+                </>
               )}
             </div>
             <div className="maylike-products-wrapper">
@@ -182,7 +190,9 @@ const ProductDetails = () => {
             changeHandler={changeHandler}
             editHandler={editHandler}
           />
-          <button className="btn" onClick={editHandler}>Cancel</button>
+          <button className="btn" onClick={editHandler}>
+            Cancel
+          </button>
         </div>
       )}
     </div>
