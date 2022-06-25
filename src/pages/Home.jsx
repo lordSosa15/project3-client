@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div>
       <HeroBanner />
-      <br />
+<br />
       <h1>{user ? `Welcome ${user.email}` : "BEST DEALS ON THE WEB"}</h1>
 
       <FooterBanner />
